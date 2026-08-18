@@ -1,5 +1,4 @@
 <h4> Share yours ideas </h4>
-@if(!($editing ?? false))
                 <div class="row">
                   <form action="{{ route('ideas.store') }}" method="post">
                     @csrf
@@ -15,4 +14,3 @@
                   </form>
                     
                 </div>
-                @endif

@@ -13,7 +13,7 @@ class IdeaController extends Controller
     ]);
         $idea = Idea::create(
             [
-                'content'=> request()->get('content',''),
+                'content'=> request('content',''),
             ]
         );
         return redirect()
@@ -22,9 +22,7 @@ class IdeaController extends Controller
     }
 
     public function show(Idea $idea) {
-        return view('ideas.show',[
-            'idea' => $idea
-        ]);
+        return view('ideas.show',compact('idea'));
     }
 
     public function destroy( Idea $idea) {
@@ -40,6 +38,7 @@ class IdeaController extends Controller
     }
     
     public function update(Idea $idea, Request $request) {
+        
         $request->validate([
         'content' => 'required|min:5|max:100',
     ]);
@@ -47,7 +46,8 @@ class IdeaController extends Controller
         'content' => $request->content,
     ]);
     return redirect()
-         ->route('dashboard')
+         ->route('ideas.show',$idea->id)
+         ->with('editing', true)
          ->with('success','IDEA UPDATED SUCCESSFULLY !');
     }
 }

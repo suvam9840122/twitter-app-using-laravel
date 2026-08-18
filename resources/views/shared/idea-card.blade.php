@@ -33,7 +33,7 @@
                                     @enderror
                                 </div>
                                 <div>
-                                    <button type="submit" class="btn btn-dark"> Share </button>
+                                    <button type="submit" class="btn btn-dark btn-sm"> Update </button>
                                 </div>
                             </form>
                             @else
