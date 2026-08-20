@@ -11,7 +11,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    @auth()
+                                    
                                     <a href="{{ route('ideas.edit', $idea->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                     <a href="{{ route('ideas.show',$idea->id) }}" class="px-3">view</a>
                                   <form  method="POST" action=" {{ route('ideas.destroy',$idea->id) }}" >
@@ -19,7 +19,7 @@
                                     @method('delete')
                                     <button class="btn btn-danger btn-sm">X</button>
                                   </form>
-                                  @endauth
+                                  
                                 </div>
                             </div>
                         </div>
