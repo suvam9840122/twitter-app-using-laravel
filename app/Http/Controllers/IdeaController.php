@@ -13,7 +13,9 @@ class IdeaController extends Controller
         $validated = request()->validate([
             'content' => 'required|min:5|max:100',
         ]);
-        $idea = Idea::create($validated);
+        $validated['user_id'] = auth()->id();
+
+        Idea::create($validated);
         return redirect()
             ->route('dashboard')
             ->with('success', 'IDEA CREATED SUCCESSFULLY !');
@@ -26,6 +28,9 @@ class IdeaController extends Controller
 
     public function destroy(Idea $idea)
     {
+        if(auth()->id() !== $idea->user_id) {
+            abort(403);
+        }
         $idea->delete();
         return redirect()
             ->route('dashboard')
@@ -34,12 +39,20 @@ class IdeaController extends Controller
 
     public function edit(Idea $idea)
     {
+         if(auth()->id() !== $idea->user_id) {
+            abort(403);
+        }
+
         $editing = true;
         return view('ideas.show', compact('idea', 'editing'));
     }
 
     public function update(Idea $idea, Request $request)
     {
+
+    if(auth()->id() !== $idea->user_id) {
+            abort(403);
+        }
 
         $validated = $request->validate([
             'content' => 'required|min:5|max:100',

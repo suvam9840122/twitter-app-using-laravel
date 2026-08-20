@@ -7,16 +7,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Comment;
 class Idea extends Model
 {
+
  use HasFactory;
-    
+ 
+ protected $fillable = [
+     'user_id',
+     'content',
+     'like'
+ ];
+ 
     public function comments()
 {
     return $this->hasMany(Comment::class);
 }
 
-    protected $fillable = [
-        'content',
-        'like'
-    ];
+public function user(){
+        return $this->belongsTo(User::class);
+    }
 
 }
